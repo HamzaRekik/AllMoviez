@@ -1,62 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_api/cubits/get_image_cubit/get_image_cubit.dart';
+import 'package:movies_api/models/movie.dart';
 
 class MovieWidget extends StatelessWidget {
+  MovieWidget({required this.movie});
+  final Movie movie;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      height: 200,
-      width: 340,
-      child: Row(
-        children: [
-          Expanded(
-              child: Image(
-            image: AssetImage("assets/messi.jpg"),
-            height: 200,
-            width: 200,
-            fit: BoxFit.cover,
-          )),
-          Expanded(
-              flex: 2,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                        child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "hi",
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.left,
-                      ),
-                    )),
-                    Expanded(
-                        child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "hi",
-                        style: TextStyle(color: Colors.white),
-                        textAlign: TextAlign.left,
-                      ),
-                    )),
-                    Expanded(
-                        flex: 6,
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "hi fzef hureugh rfoerg gurorg rgoig grehiog greuohgio greng grehg gçerhg giierihg gà_ehgàngà_erng à_gre g_ge_àrg ger_àhg giher  geà_rjggrj igherigg çgeriàgjeogi nbiu ubujpmk i  u jihuhuho huoh ",
-                            style: TextStyle(color: Colors.white),
-                            textAlign: TextAlign.left,
-                          ),
-                        )),
-                  ],
-                ),
-              ))
-        ],
+    return GestureDetector(
+      onTap: () {
+        BlocProvider.of<GetImagesCubit>(context).getMovieImage(movie);
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: 200,
+        width: 340,
+        child: Row(
+          children: [
+            Expanded(
+                child: Image(
+              image:
+                  NetworkImage("https://image.tmdb.org/t/p/w500" + movie.image),
+              height: 200,
+              width: 200,
+              fit: BoxFit.cover,
+            )),
+            Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                          child: Row(
+                        children: [
+                          Expanded(
+                              flex: 4,
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  movie.title,
+                                  style: TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.left,
+                                ),
+                              )),
+                          Expanded(
+                              child: Text("${movie.rate}",
+                                  style: TextStyle(color: Colors.white)))
+                        ],
+                      )),
+                      Expanded(
+                          child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          movie.date,
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.left,
+                        ),
+                      )),
+                      Expanded(
+                          flex: 6,
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              movie.description,
+                              style: TextStyle(color: Colors.white),
+                              textAlign: TextAlign.left,
+                            ),
+                          )),
+                    ],
+                  ),
+                ))
+          ],
+        ),
       ),
-      color: Colors.transparent,
     );
   }
 }

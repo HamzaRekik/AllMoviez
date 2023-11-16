@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui;
 
+import 'package:movies_api/cubits/get_image_cubit/get_image_cubit.dart';
+
 class BluredImage extends StatelessWidget {
-  BluredImage({required this.imageURL});
-  final String imageURL;
   @override
   Widget build(BuildContext context) {
+    var image = BlocProvider.of<GetImagesCubit>(context).image;
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(imageURL),
+          image: NetworkImage("https://image.tmdb.org/t/p/w500" + image),
           fit: BoxFit.cover,
         ),
       ),
