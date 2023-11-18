@@ -21,8 +21,7 @@ class MovieWidget extends StatelessWidget {
           children: [
             Expanded(
                 child: Image(
-              image:
-                  NetworkImage("https://image.tmdb.org/t/p/w500" + movie.image),
+              image: NetworkImage(movie.image),
               height: 200,
               width: 200,
               fit: BoxFit.cover,
@@ -48,7 +47,7 @@ class MovieWidget extends StatelessWidget {
                                 ),
                               )),
                           Expanded(
-                              child: Text("${movie.rate}",
+                              child: Text("${movie.rate.round()}",
                                   style: TextStyle(color: Colors.white)))
                         ],
                       )),

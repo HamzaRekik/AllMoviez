@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_api/widgets/build_widget_blur.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_api/cubits/get_movies_cubit/get_movies_cubit.dart';
+import 'package:movies_api/widgets/blurred_widgets/build_widget_blur.dart';
 
 class SearchBanner extends StatelessWidget {
   const SearchBanner({
@@ -18,11 +20,17 @@ class SearchBanner extends StatelessWidget {
               size: 25,
               color: Colors.white.withOpacity(0.4),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
+              width: 270,
               child: TextField(
+                style: TextStyle(color: Colors.white),
+                onSubmitted: (value) {
+                  BlocProvider.of<GetMoviesCubit>(context)
+                      .searchMovies(query: value);
+                },
                 decoration: InputDecoration(
                     focusedBorder: InputBorder.none,
                     hintText: "Search...",
@@ -30,7 +38,6 @@ class SearchBanner extends StatelessWidget {
                         color: Colors.white.withOpacity(0.4), fontSize: 18)),
                 showCursor: false,
               ),
-              width: 170,
             )
           ],
         ),

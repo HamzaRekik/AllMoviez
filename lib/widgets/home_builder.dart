@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_api/widgets/movies_builder.dart';
-import 'package:movies_api/widgets/movies_list.dart';
 import 'package:movies_api/widgets/search_banner.dart';
 
 class HomeView extends StatelessWidget {
