@@ -13,9 +13,7 @@ class Movie {
   });
 
   factory Movie.fromJson(json) => Movie(
-      image: json["poster_path"] == null
-          ? "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
-          : "https://image.tmdb.org/t/p/w500${json["poster_path"]}",
+      image: json["poster_path"],
       title: json['title'] ?? json['name'],
       description: json['overview'],
       rate: json['vote_average'],

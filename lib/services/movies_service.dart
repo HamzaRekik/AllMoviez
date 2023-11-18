@@ -15,6 +15,7 @@ class MoviesService {
       Response response;
       Options options =
           Options(headers: {'Authorization': 'Bearer $bearerToken'});
+
       if (title == null) {
         response = await dio.get("$url/trending/all/day?language=en-US",
             options: options);
@@ -25,7 +26,7 @@ class MoviesService {
       }
 
       for (var movie in response.data['results']) {
-        if (movies.length < 15) {
+        if (movies.length < 15 && movie["poster_path"] != null) {
           Movie m = Movie.fromJson(movie);
           movies.add(m);
         }

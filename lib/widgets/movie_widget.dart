@@ -21,7 +21,8 @@ class MovieWidget extends StatelessWidget {
           children: [
             Expanded(
                 child: Image(
-              image: NetworkImage(movie.image),
+              image:
+                  NetworkImage("https://image.tmdb.org/t/p/w500${movie.image}"),
               height: 200,
               width: 200,
               fit: BoxFit.cover,
@@ -41,12 +42,14 @@ class MovieWidget extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   movie.title,
                                   style: TextStyle(color: Colors.white),
                                   textAlign: TextAlign.left,
                                 ),
                               )),
-                          Expanded(
+                          Container(
                               child: Text("${movie.rate.round()}",
                                   style: TextStyle(color: Colors.white)))
                         ],
@@ -65,6 +68,8 @@ class MovieWidget extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
+                              maxLines: 9,
+                              overflow: TextOverflow.ellipsis,
                               movie.description,
                               style: TextStyle(color: Colors.white),
                               textAlign: TextAlign.left,
